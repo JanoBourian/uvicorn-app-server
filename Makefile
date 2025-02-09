@@ -9,6 +9,7 @@ endif
 
 LOG_DIR = logs
 RUFF_CACHE_DIR = .ruff_cache
+SITE_DIR = site
 
 delete-venv:
 	@if [ -d ".venv" ]; then \
@@ -82,4 +83,5 @@ clean: clean-pycache delete-env
 	@ruff check .
 	@rm -rf .venv $(LOG_DIR)
 	@rm -rf .venv $(RUFF_CACHE_DIR)
+	@rm -rf .venv $(SITE_DIR)
 	@echo "✅ Cleanup complete!"

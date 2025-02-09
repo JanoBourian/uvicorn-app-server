@@ -1,4 +1,5 @@
 black
+mkdocs-material
 python-dotenv
 PyYAML
 ruff

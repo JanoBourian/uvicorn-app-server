@@ -39,9 +39,20 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install mkdocs mkdocs-material
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Check if mkdocs.yml exists
+        run: |
+          if [ ! -f mkdocs.yml ]; then 
+            echo "❌ ERROR: mkdocs.yml not found!"; 
+            exit 1; 
+          fi
+
+      - name: Disable Jekyll for GitHub Pages
+        run: touch docs/.nojekyll
 
       - name: Build MkDocs Site
-        run: mkdocs build --strict
+        run: mkdocs build --clean --strict
 
       - name: Deploy MkDocs to GitHub Pages
         run: mkdocs gh-deploy --force

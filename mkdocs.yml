@@ -1,4 +1,51 @@
 site_name: Uvicorn App Server
-site_url: https://mydomain.org/mysite
 theme:
   name: material
+  palette:
+    scheme: slate
+    primary: blue
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+use_directory_urls: false
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - API Documentation: api.md
+  - Deployment: deployment.md
+  - About: about.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - sane_lists
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.highlight:
+      use_pygments: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+plugins:
+  - search
+  - tags
+
+extra:
+  generator: false

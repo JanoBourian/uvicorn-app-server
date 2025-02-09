@@ -1,4 +1,12 @@
+from app.utils.helpers import configure_logger
+
+logger = configure_logger("main")
+
+
 async def app(scope, receive, send):
+    logger.info(f"🚀 New connection: {scope}")
+    logger.info(f"📦 Received: {await receive()}")
+
     assert scope["type"] == "http"
     await send(
         {

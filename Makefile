@@ -71,13 +71,15 @@ create-logs: delete-logs
 
 start-server:
 	@echo "🚀 Starting Uvicorn Server..."
-	@.venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload --env-file .env --log-config logs --log-level trace --access-log --use-colors
+	@.venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload --env-file .env --log-config logs.yaml --log-level trace --access-log --use-colors
 
-setup: install-requirements create-logs create-env
+setup: install-requirements create-logs create-env start-server
 	@echo "🚀 Project setup complete!"
 
 clean: clean-pycache delete-env
 	@echo "🗑️  Cleaning up project..."
+	@black .
+	@ruff check .
 	@rm -rf .venv $(LOG_DIR)
 	@rm -rf .venv $(RUFF_CACHE_DIR)
 	@echo "✅ Cleanup complete!"

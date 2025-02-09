@@ -1,0 +1,55 @@
+version: 1
+disable_existing_loggers: false
+
+formatters:
+  yaml_formatter:
+    format: "---\n timestamp: \"%(asctime)s\"\n level: \"%(levelname)s\"\n logger: \"%(name)s\"\n message: '%(message)s'\n"
+
+  detailed_yaml_formatter:
+    format: "---\n timestamp: \"%(asctime)s\"\n level: \"%(levelname)s\"\n logger: \"%(name)s\"\n file: \"%(filename)s\"\n line: \"%(lineno)d\"\n message: '%(message)s'\n"
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: INFO
+    formatter: yaml_formatter
+    stream: ext://sys.stdout
+
+  file:
+    class: logging.FileHandler
+    level: INFO
+    formatter: detailed_yaml_formatter
+    filename: logs/uvicorn_app.yaml
+    mode: a
+
+  error_file:
+    class: logging.FileHandler
+    level: ERROR
+    formatter: detailed_yaml_formatter
+    filename: logs/errors.yaml
+    mode: a
+
+loggers:
+  uvicorn:
+    level: INFO
+    handlers: [console, file]
+    propagate: no
+
+  uvicorn.access:
+    level: INFO
+    handlers: [console, file]
+    propagate: no
+
+  uvicorn.error:
+    level: ERROR
+    handlers: [error_file, console]
+    propagate: no
+
+  app:
+    level: DEBUG
+    handlers: [console, file, error_file]
+    propagate: yes
+
+root:
+  level: INFO
+  handlers: [console, file, error_file]

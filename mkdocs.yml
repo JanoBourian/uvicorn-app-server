@@ -3,7 +3,7 @@ theme:
   name: material
   palette:
     scheme: slate
-    primary: blue
+    primary: deep purple
   font:
     text: Roboto
     code: Roboto Mono
